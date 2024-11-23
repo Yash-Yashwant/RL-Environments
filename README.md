@@ -4,9 +4,8 @@ Directory Structure,
 
 Journals: Contains Journals which are yet to be read, and my take away from each journal. 
 
-## Notebooks
+## .py files
 
-Jupyter-notebooks, RL practical implementation.
 
 ## Training
 

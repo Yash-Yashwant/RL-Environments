@@ -1,0 +1,41 @@
+import gymnasium as gym 
+from stable_baselines3 import PPO
+import os
+import tensorboard
+
+#path to store the logs 
+
+model_directory = "models_lunar/PPO"
+log_directory = "logs_lunar"
+
+env = gym.make("LunarLander-v2")
+
+# chosing the RL algo
+model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=log_directory)
+
+# agent training 
+
+for i in range(30):
+    model.learn(total_timesteps=10000, reset_num_timesteps=False, tb_log_name="PPO_lunar")
+    model.save(f"{model_directory}/{10000*i}")
+
+# agent evaluation 
+
+episode = 50
+
+
+for ep in episode:
+    done = False
+    obs, _ = env.reset()
+
+    while not done:
+        env.render()
+        action, _= model.predict(obs)
+        obs, info, done, _ = env.step(action)
+
+    env.close()
+
+
+
+
+
